@@ -1,18 +1,37 @@
 import React from 'react';
+import { motion } from 'motion/react';
 
 export default function About() {
   return (
     <div className="pt-32 px-6 max-w-7xl mx-auto min-h-screen">
-      <h1 className="text-5xl font-black mb-8 text-gradient">The Engine Room</h1>
-      <p className="text-on-surface-variant text-lg max-w-2xl mb-16">
-        Regulus Labs is a collective of engineers, designers, and deep thinkers dedicated to building software that shifts paradigms. We're driven by the philosophy that high-tech tools should be both beautiful and blazingly fast.
-      </p>
-      <div className="glass-panel rounded-xl p-12">
-        <h3 className="text-sm font-bold text-secondary-fixed uppercase tracking-widest mb-6">Our Mission</h3>
+      <motion.h1 
+        className="text-5xl font-black mb-8 text-[#50c878]"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        About Regulus Labs
+      </motion.h1>
+      <motion.p 
+        className="text-on-surface-variant text-lg max-w-2xl mb-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        Regulus Labs is a cutting-edge software development company run by <strong>Dhruvya Malhotra</strong>. We specialize in crafting high-performance mobile applications and modern, scalable websites designed to elevate your digital presence.
+      </motion.p>
+      <motion.div 
+        className="bg-[#131313] border border-[#50c878]/20 rounded-xl p-12"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <h3 className="text-sm font-bold text-[#50c878] uppercase tracking-widest mb-6">Our Core</h3>
         <p className="text-xl md:text-3xl font-light leading-relaxed">
-          "To craft highly efficient digital tools that help ambitious enterprises scale gracefully into the future."
+          "Led by Dhruvya Malhotra, we combine technical excellence with creative vision to build the next generation of digital products."
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }
+

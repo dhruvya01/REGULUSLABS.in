@@ -1,5 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import { MessageCircle } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function Layout() {
   const location = useLocation();
@@ -7,6 +9,11 @@ export default function Layout() {
   const isActive = (path: string) => {
     return location.pathname === path ? "text-[#50c878] border-b border-[#50c878] pb-1" : "text-on-surface-variant hover:text-secondary-fixed pb-1 border-b border-transparent";
   };
+
+  // Replace with your actual WhatsApp number (include country code, e.g., 919876543210)
+  const whatsappNumber = "917889686144"; 
+  const message = encodeURIComponent("Hi Dhruvya, I'm interested in working with Regulus Labs. Can we discuss a project?");
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
   return (
     <div className="bg-[#000000] selection:bg-primary-container selection:text-on-primary-container min-h-screen text-on-surface flex flex-col">
@@ -27,8 +34,32 @@ export default function Layout() {
         </div>
       </nav>
 
+      {/* Floating WhatsApp Button */}
+      <motion.a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-[#25D366]/40 transition-shadow duration-300 flex items-center justify-center group"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <MessageCircle className="w-6 h-6" />
+        <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 ease-in-out font-bold text-sm">
+          Chat with us
+        </span>
+      </motion.a>
+
       <main className="flex-1">
-        <Outlet />
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <Outlet />
+        </motion.div>
       </main>
 
       {/* Footer */}
@@ -38,7 +69,6 @@ export default function Layout() {
           <div className="flex flex-wrap justify-center gap-8">
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/mobile-apps">Custom Mobile Apps</Link>
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/websites">High-Performance Websites</Link>
-            <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/enterprise">Enterprise Software</Link>
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/contact">Contact</Link>
           </div>
           <div className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant font-medium">
