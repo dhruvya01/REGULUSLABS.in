@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { MessageCircle, Menu, X } from 'lucide-react';
+import { MessageCircle, MoreVertical, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Layout() {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const isActive = (path: string) => {
-    return location.pathname === path ? "text-[#50c878] border-b border-[#50c878] pb-1" : "text-on-surface-variant hover:text-secondary-fixed pb-1 border-b border-transparent";
+    return location.pathname === path ? "text-[#50c878] border-b border-[#50c878] pb-1 whitespace-nowrap" : "text-on-surface-variant hover:text-secondary-fixed pb-1 border-b border-transparent whitespace-nowrap";
   };
 
   // Replace with your actual WhatsApp number (include country code, e.g., 919876543210)
@@ -16,18 +16,24 @@ export default function Layout() {
   const message = encodeURIComponent("Hi Dhruvya, I'm interested in working with Regulus Labs. Can we discuss a project?");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
   return (
     <div className="bg-[#000000] selection:bg-primary-container selection:text-on-primary-container min-h-screen text-on-surface flex flex-col">
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-md shadow-[0_1px_20px_rgba(80,200,120,0.05)] transition-all duration-300">
-        <div className="flex justify-between items-center px-6 md:px-8 py-4 max-w-full mx-auto relative z-50">
-          <Link to="/" onClick={closeMobileMenu} className="text-xl font-black tracking-tighter text-[#50c878]">Regulus Labs</Link>
+        <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 max-w-full mx-auto relative">
           
-          {/* Desktop Navigation */}
+          {/* Left Side: 3-dot Menu + Logo */}
+          <div className="flex items-center gap-3">
+            <button 
+              className="md:hidden text-on-surface p-1 -ml-1 focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={24} /> : <MoreVertical size={24} />}
+            </button>
+            <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-xl font-black tracking-tighter text-[#50c878]">Regulus Labs</Link>
+          </div>
+
+          {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
             <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/services')}`} to="/services">Services</Link>
             <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/projects')}`} to="/projects">Projects</Link>
@@ -35,39 +41,28 @@ export default function Layout() {
             <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/about')}`} to="/about">About</Link>
           </div>
           
-          <div className="hidden md:block">
-            <Link to="/contact" className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-5 py-2 rounded-lg text-sm font-bold tracking-tight active:opacity-80 transition-all hover:scale-105">
+          {/* Right Side: Start a Project CTA */}
+          <div>
+            <Link to="/contact" className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-4 md:px-5 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold tracking-tight active:opacity-80 transition-all hover:scale-105">
               Start a Project
             </Link>
           </div>
-
-          {/* Mobile Menu Toggle Button */}
-          <button 
-            className="md:hidden text-on-surface p-2 -mr-2 focus:outline-none"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
 
         {/* Mobile Navigation Dropdown */}
         <AnimatePresence>
-          {isMobileMenuOpen && (
+          {isMenuOpen && (
             <motion.div 
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden bg-[#131313] border-b border-outline-variant/10"
+              className="md:hidden overflow-hidden bg-[#131313] border-b border-outline-variant/10 absolute top-full left-0 w-full shadow-xl"
             >
               <div className="flex flex-col px-6 py-6 gap-6">
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/services')}`} onClick={closeMobileMenu} to="/services">Services</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/projects')}`} onClick={closeMobileMenu} to="/projects">Projects</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/lab')}`} onClick={closeMobileMenu} to="/lab">The Lab</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/about')}`} onClick={closeMobileMenu} to="/about">About</Link>
-                
-                <Link to="/contact" onClick={closeMobileMenu} className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-5 py-3 mt-4 rounded-lg text-center text-sm font-bold tracking-tight active:opacity-80">
-                  Start a Project
-                </Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/services')}`} onClick={() => setIsMenuOpen(false)} to="/services">Services</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/projects')}`} onClick={() => setIsMenuOpen(false)} to="/projects">Projects</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/lab')}`} onClick={() => setIsMenuOpen(false)} to="/lab">The Lab</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/about')}`} onClick={() => setIsMenuOpen(false)} to="/about">About</Link>
               </div>
             </motion.div>
           )}
