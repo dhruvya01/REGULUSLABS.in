@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
 import About from './pages/About';
+import Contact from './pages/Contact';
 import MustGymProduct from './pages/MustGymProduct';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="services" element={<Services />} />
           <Route path="projects" element={<Projects />} />
           <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="mustgym" element={<MustGymProduct />} />
           {/* Catch-all for other links to redirect or show a placeholder */}
           <Route path="*" element={<Home />} />
