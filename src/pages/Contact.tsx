@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Smartphone, Globe, Bot, Send, MessageCircle, Mail, ChevronLeft } from 'lucide-react';
+import { Smartphone, Globe, Bot, Send, MessageCircle, Mail, ChevronLeft, IndianRupee, Calendar } from 'lucide-react';
 
-type Step = 'service' | 'description' | 'method';
+type Step = 'service' | 'description' | 'details' | 'method';
 type ServiceType = 'Mobile App' | 'Website' | 'AI Agent';
 
 export default function Contact() {
   const [step, setStep] = useState<Step>('service');
   const [service, setService] = useState<ServiceType | null>(null);
   const [description, setDescription] = useState('');
+  const [budget, setBudget] = useState('');
+  const [timeline, setTimeline] = useState('');
 
   const whatsappNumber = "917889686144";
   const gmailAddress = "regulus.labss@gmail.com";
@@ -22,7 +24,9 @@ export default function Contact() {
     return `Hi Dhruvya, I'm interested in starting a project with Regulus Labs.
 
 Project Type: ${service}
-Description: ${description}`;
+Description: ${description}
+Budget Range: ${budget}
+Target Timeline: ${timeline}`;
   };
 
   const openWhatsApp = () => {
@@ -37,10 +41,10 @@ Description: ${description}`;
   };
 
   const containerVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-    transition: { duration: 0.4, ease: "easeOut" }
+    initial: { opacity: 0, scale: 0.98, y: 10 },
+    animate: { opacity: 1, scale: 1, y: 0 },
+    exit: { opacity: 0, scale: 0.98, y: -10 },
+    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
   };
 
   return (
@@ -122,10 +126,79 @@ Description: ${description}`;
 
             <button
               disabled={!description.trim()}
-              onClick={() => setStep('method')}
+              onClick={() => setStep('details')}
               className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(80,200,120,0.2)] transition-all"
             >
-              Continue to Dispatch <Send className="w-5 h-5" />
+              Set Scope <Send className="w-5 h-5 ml-2" />
+            </button>
+          </motion.div>
+        )}
+
+        {step === 'details' && (
+          <motion.div 
+            key="details"
+            {...containerVariants}
+            className="glass-panel p-8 md:p-12 rounded-3xl"
+          >
+            <button 
+              onClick={() => setStep('description')}
+              className="flex items-center gap-2 text-xs font-bold text-on-surface-variant hover:text-primary transition-colors mb-8 uppercase tracking-widest"
+            >
+              <ChevronLeft className="w-4 h-4" /> Back to Brief
+            </button>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <IndianRupee className="w-5 h-5 text-primary" />
+                  <h3 className="text-lg font-bold">Estimated Budget</h3>
+                </div>
+                <div className="grid grid-cols-1 gap-3">
+                  {['Under ₹50k', '₹50k - ₹1L', '₹1L - ₹5L', '₹5L+'].map((range) => (
+                    <button
+                      key={range}
+                      onClick={() => setBudget(range)}
+                      className={`px-6 py-4 rounded-xl border text-left font-medium transition-all ${
+                        budget === range 
+                        ? 'bg-primary/10 border-primary text-primary' 
+                        : 'bg-surface-container-low border-outline/20 text-on-surface-variant hover:border-primary/40'
+                      }`}
+                    >
+                      {range}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <Calendar className="w-5 h-5 text-secondary-fixed" />
+                  <h3 className="text-lg font-bold">Desired Timeline</h3>
+                </div>
+                <div className="grid grid-cols-1 gap-3">
+                  {['Less than 2 weeks', '2-4 weeks', '1-3 months', '3 months+'].map((time) => (
+                    <button
+                      key={time}
+                      onClick={() => setTimeline(time)}
+                      className={`px-6 py-4 rounded-xl border text-left font-medium transition-all ${
+                        timeline === time 
+                        ? 'bg-secondary-fixed/10 border-secondary-fixed text-secondary-fixed' 
+                        : 'bg-surface-container-low border-outline/20 text-on-surface-variant hover:border-secondary-fixed/40'
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <button
+              disabled={!budget || !timeline}
+              onClick={() => setStep('method')}
+              className="w-full mt-12 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(80,200,120,0.2)] transition-all"
+            >
+              Continue to Dispatch <Send className="w-5 h-5 ml-2" />
             </button>
           </motion.div>
         )}
@@ -137,10 +210,10 @@ Description: ${description}`;
             className="text-center"
           >
             <button 
-              onClick={() => setStep('description')}
+              onClick={() => setStep('details')}
               className="flex items-center gap-2 text-xs font-bold text-on-surface-variant hover:text-primary transition-colors mb-12 uppercase tracking-widest mx-auto"
             >
-              <ChevronLeft className="w-4 h-4" /> Back to Description
+              <ChevronLeft className="w-4 h-4" /> Back to Scope
             </button>
 
             <h2 className="text-2xl font-bold mb-2">Choose Transmission</h2>
@@ -177,3 +250,4 @@ Description: ${description}`;
     </div>
   );
 }
+
