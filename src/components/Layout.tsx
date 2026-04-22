@@ -8,7 +8,7 @@ export default function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const isActive = (path: string) => {
-    return location.pathname === path ? "text-[#50c878] border-b border-[#50c878] pb-1 whitespace-nowrap" : "text-on-surface-variant hover:text-secondary-fixed pb-1 border-b border-transparent whitespace-nowrap";
+    return location.pathname === path ? "text-primary border-b border-primary pb-1 whitespace-nowrap" : "text-on-surface-variant hover:text-secondary-fixed pb-1 border-b border-transparent whitespace-nowrap";
   };
 
   // Replace with your actual WhatsApp number (include country code, e.g., 919876543210)
@@ -16,10 +16,12 @@ export default function Layout() {
   const message = encodeURIComponent("Hi Dhruvya, I'm interested in working with Regulus Labs. Can we discuss a project?");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
-    <div className="bg-[#000000] selection:bg-primary-container selection:text-on-primary-container min-h-screen text-on-surface flex flex-col">
+    <div className="bg-surface-container-lowest selection:bg-primary-container selection:text-on-primary-container min-h-screen text-on-surface flex flex-col">
       {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-md shadow-[0_1px_20px_rgba(80,200,120,0.05)] transition-all duration-300">
+      <nav className="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_20px_rgba(141,232,232,0.05)] transition-all duration-300">
         <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 max-w-full mx-auto relative">
           
           {/* Left Side: 3-dot Menu + Logo */}
@@ -30,9 +32,6 @@ export default function Layout() {
             >
               {isMenuOpen ? <X size={24} /> : <MoreVertical size={24} />}
             </button>
-            <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center">
-              <img src="/logo.png" alt="Regulus Labs" className="h-8 w-auto md:h-10 transition-transform hover:scale-105" />
-            </Link>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -58,13 +57,13 @@ export default function Layout() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden bg-[#131313] border-b border-outline-variant/10 absolute top-full left-0 w-full shadow-xl"
+              className="md:hidden overflow-hidden bg-surface border-b border-outline-variant/10 absolute top-full left-0 w-full shadow-xl"
             >
               <div className="flex flex-col px-6 py-6 gap-6">
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/services')}`} onClick={() => setIsMenuOpen(false)} to="/services">Services</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/projects')}`} onClick={() => setIsMenuOpen(false)} to="/projects">Projects</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/lab')}`} onClick={() => setIsMenuOpen(false)} to="/lab">The Lab</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/about')}`} onClick={() => setIsMenuOpen(false)} to="/about">About</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/services')}`} onClick={closeMenu} to="/services">Services</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/projects')}`} onClick={closeMenu} to="/projects">Projects</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/lab')}`} onClick={closeMenu} to="/lab">The Lab</Link>
+                <Link className={`tracking-tight text-lg font-medium ${isActive('/about')}`} onClick={closeMenu} to="/about">About</Link>
               </div>
             </motion.div>
           )}
@@ -101,10 +100,7 @@ export default function Layout() {
 
       {/* Footer */}
       <footer className="bg-surface-container-lowest w-full py-12 px-8 border-t border-outline-variant/10 relative z-10 mt-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
-          <Link to="/" className="flex items-center">
-            <img src="/logo.png" alt="Regulus Labs" className="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          </Link>
+        <div className="flex flex-col md:flex-row justify-end items-center gap-6 max-w-7xl mx-auto">
           <div className="flex flex-wrap justify-center gap-8">
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/mobile-apps">Custom Mobile Apps</Link>
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/websites">High-Performance Websites</Link>

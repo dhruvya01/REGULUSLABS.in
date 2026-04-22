@@ -46,12 +46,12 @@ export default function Services() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={itemVariants} className="glass-panel p-8 rounded-xl hover:border-[#50c878]/40 transition-colors">
+        <motion.div variants={itemVariants} className="glass-panel p-8 rounded-xl hover:border-primary/40 transition-colors">
            <h2 className="text-2xl font-bold mb-4">Mobile Architecture</h2>
            <p className="text-on-surface-variant">Building pixel-perfect, native-speed iOS and Android applications perfectly tuned for both scale and conversion.</p>
         </motion.div>
         <motion.div variants={itemVariants} className="glass-panel p-8 rounded-xl hover:border-secondary-fixed/40 transition-colors">
-           <h2 className="text-2xl font-bold mb-4 text-secondary-fixed">Web Experience</h2>
+           <h2 className="text-2xl font-bold mb-4 text-primary">Web Experience</h2>
            <p className="text-on-surface-variant">Deploying React, Next.js, and modern frontend environments that load instantly and perform immaculately on all devices.</p>
         </motion.div>
       </motion.div>

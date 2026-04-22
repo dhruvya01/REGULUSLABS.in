@@ -127,7 +127,7 @@ Target Timeline: ${timeline}`;
             <button
               disabled={!description.trim()}
               onClick={() => setStep('details')}
-              className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(80,200,120,0.2)] transition-all"
+              className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(141,232,232,0.2)] transition-all"
             >
               Set Scope <Send className="w-5 h-5 ml-2" />
             </button>
@@ -172,7 +172,7 @@ Target Timeline: ${timeline}`;
 
               <div className="space-y-6">
                 <div className="flex items-center gap-3 mb-2">
-                  <Calendar className="w-5 h-5 text-secondary-fixed" />
+                  <Calendar className="w-5 h-5 text-primary" />
                   <h3 className="text-lg font-bold">Desired Timeline</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-3">
@@ -182,8 +182,8 @@ Target Timeline: ${timeline}`;
                       onClick={() => setTimeline(time)}
                       className={`px-6 py-4 rounded-xl border text-left font-medium transition-all ${
                         timeline === time 
-                        ? 'bg-secondary-fixed/10 border-secondary-fixed text-secondary-fixed' 
-                        : 'bg-surface-container-low border-outline/20 text-on-surface-variant hover:border-secondary-fixed/40'
+                        ? 'bg-primary/10 border-primary text-primary' 
+                        : 'bg-surface-container-low border-outline/20 text-on-surface-variant hover:border-primary/40'
                       }`}
                     >
                       {time}
@@ -196,7 +196,7 @@ Target Timeline: ${timeline}`;
             <button
               disabled={!budget || !timeline}
               onClick={() => setStep('method')}
-              className="w-full mt-12 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(80,200,120,0.2)] transition-all"
+              className="w-full mt-12 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(141,232,232,0.2)] transition-all"
             >
               Continue to Dispatch <Send className="w-5 h-5 ml-2" />
             </button>

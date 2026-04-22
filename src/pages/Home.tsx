@@ -64,7 +64,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <Link to="/contact" className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-lg hover:shadow-[0_0_30px_rgba(110,229,145,0.3)] transition-all duration-300">
+          <Link to="/contact" className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-lg hover:shadow-[0_0_30px_rgba(141,232,232,0.3)] transition-all duration-300">
             Start
           </Link>
           <Link to="/projects" className="w-full sm:w-auto px-10 py-4 glass-panel text-on-surface font-bold rounded-lg hover:bg-surface-container-high transition-all">

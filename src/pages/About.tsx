@@ -30,28 +30,28 @@ export default function About() {
       animate="visible"
     >
       <motion.div variants={itemVariants} className="mb-16">
-        <h1 className="text-5xl md:text-7xl font-black mb-6 text-[#50c878] tracking-tighter">
+        <h1 className="text-5xl md:text-7xl font-black mb-6 text-primary tracking-tighter">
           Regulus Labs: <br />
           <span className="text-on-surface">Engineering the Future</span>
         </h1>
         <p className="text-on-surface-variant text-xl max-w-3xl leading-relaxed font-light">
-          At Regulus Labs, we believe that local businesses deserve world-class technology. Named after the brightest star in the Leo constellation—the <span className="text-[#50c878] font-medium">'Little King'</span>—our mission is to provide small and medium enterprises with the digital armor they need to dominate their markets.
+          At Regulus Labs, we believe that local businesses deserve world-class technology. Named after the brightest star in the Leo constellation—the <span className="text-primary font-medium">'Little King'</span>—our mission is to provide small and medium enterprises with the digital armor they need to dominate their markets.
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-        <motion.div variants={itemVariants} className="glass-panel p-8 rounded-2xl border-l-4 border-[#50c878]">
+        <motion.div variants={itemVariants} className="glass-panel p-8 rounded-2xl border-l-4 border-primary">
           <h2 className="text-2xl font-bold mb-4">The Mission</h2>
           <p className="text-on-surface-variant leading-relaxed mb-6">
             Founded in 2026, Regulus Labs is a high-performance software agency specializing in fully-animated mobile applications, AI-integrated management systems, and high-stakes web infrastructure.
           </p>
           <div className="space-y-3">
              <div className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#50c878]"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
                 <span className="text-sm">Bespoke Mobile Architecture</span>
              </div>
              <div className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#50c878]"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
                 <span className="text-sm">AI-Driven Business Logic</span>
              </div>
           </div>
@@ -71,11 +71,11 @@ export default function About() {
       </div>
 
       <motion.div 
-        className="bg-[#131313] border border-[#50c878]/20 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden"
+        className="bg-surface border border-primary/20 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden"
         variants={itemVariants}
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[#50c878]/50 to-transparent"></div>
-        <h2 className="text-3xl md:text-5xl font-black mb-6">Digital Dominance <span className="text-[#50c878]">Guaranteed</span></h2>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+        <h2 className="text-3xl md:text-5xl font-black mb-6">Digital Dominance <span className="text-primary">Guaranteed</span></h2>
         <p className="text-on-surface-variant text-lg max-w-2xl mx-auto mb-10">
           We combine technical excellence with family-driven integrity to ensure your business stays ahead of the orbital curve.
         </p>
