@@ -40,30 +40,30 @@ Target Timeline: ${timeline}`;
     window.location.href = `mailto:${gmailAddress}?subject=${subject}&body=${body}`;
   };
 
-  const containerVariants = {
+  const containerVariants: any = {
     initial: { opacity: 0, scale: 0.98, y: 10 },
     animate: { opacity: 1, scale: 1, y: 0 },
     exit: { opacity: 0, scale: 0.98, y: -10 },
-    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.3, ease: "easeOut" }
   };
 
   return (
-    <div className="pt-32 px-6 max-w-4xl mx-auto min-h-screen pb-20">
+    <div className="pt-24 md:pt-32 px-6 max-w-4xl mx-auto min-h-screen pb-20">
       <div className="mb-12 text-center">
         <motion.h1 
-          className="text-4xl md:text-5xl font-black mb-4 tracking-tight"
+          className="text-3xl md:text-4xl font-black mb-4 tracking-tight"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Initialize <span className="text-gradient">Project Protocol</span>
+          Start Your <span className="text-primary italic">Project.</span>
         </motion.h1>
         <motion.p 
-          className="text-on-surface-variant"
+          className="text-[#A0B2C1]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          Follow the steps to deploy your visual and technical architecture.
+          Complete the steps below to begin our collaboration.
         </motion.p>
       </div>
 
@@ -81,18 +81,18 @@ Target Timeline: ${timeline}`;
             ].map((item) => (
               <motion.button
                 key={item.id}
-                whileHover={{ y: -10, scale: 1.02 }}
+                whileHover={{ y: -5, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleServiceSelect(item.id)}
-                className="glass-panel p-8 rounded-2xl flex flex-col items-center gap-6 text-center hover:border-primary/40 transition-colors group"
+                className="glass-panel p-6 md:p-8 rounded-xl flex flex-col items-center gap-4 text-center hover:border-primary/40 transition-colors group"
               >
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center bg-${item.color}/10 border border-${item.color}/20 group-hover:bg-${item.color}/20 transition-colors`}>
+                <div className={`w-14 h-14 rounded-full flex items-center justify-center bg-${item.color}/10 border border-${item.color}/20 group-hover:bg-${item.color}/20 transition-colors`}>
                   <div className={`text-${item.color}`}>{item.icon}</div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">{item.id}</h3>
-                  <p className="text-xs text-on-surface-variant leading-relaxed">
-                    Custom-built {item.id === 'AI Agent' ? 'autonomous intelligence' : item.id === 'Website' ? 'high-fidelity web experiences' : 'native-speed mobile apps'}.
+                  <h3 className="text-lg font-bold mb-2">{item.id}</h3>
+                  <p className="text-[10px] text-[#A0B2C1] leading-relaxed">
+                    Custom-built {item.id === 'AI Agent' ? 'intelligent systems' : item.id === 'Website' ? 'web experiences' : 'mobile apps'}.
                   </p>
                 </div>
               </motion.button>
@@ -217,7 +217,7 @@ Target Timeline: ${timeline}`;
             </button>
 
             <h2 className="text-2xl font-bold mb-2">Choose Transmission</h2>
-            <p className="text-on-surface-variant text-sm mb-12">Select your preferred encrypted communication channel.</p>
+            <p className="text-[#A0B2C1] text-sm mb-12">Select your preferred communication channel.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               <motion.button
@@ -228,7 +228,6 @@ Target Timeline: ${timeline}`;
                 <MessageCircle className="w-8 h-8 text-[#25D366]" />
                 <div className="text-left">
                   <p className="text-lg">WhatsApp</p>
-                  <p className="text-[10px] text-on-surface-variant font-medium">Direct Directive</p>
                 </div>
               </motion.button>
 
@@ -239,8 +238,7 @@ Target Timeline: ${timeline}`;
               >
                 <Mail className="w-8 h-8 text-secondary-fixed" />
                 <div className="text-left">
-                  <p className="text-lg">Gmail</p>
-                  <p className="text-[10px] text-on-surface-variant font-medium">Encrypted Package</p>
+                  <p className="text-lg">Email</p>
                 </div>
               </motion.button>
             </div>

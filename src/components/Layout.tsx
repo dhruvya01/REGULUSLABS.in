@@ -21,11 +21,15 @@ export default function Layout() {
   return (
     <div className="bg-surface-container-lowest selection:bg-primary-container selection:text-on-primary-container min-h-screen text-on-surface flex flex-col">
       {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_20px_rgba(141,232,232,0.05)] transition-all duration-300">
-        <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 max-w-full mx-auto relative">
+      <nav className="fixed top-0 w-full z-50 bg-[#0D1B2A]/80 backdrop-blur-md border-b border-[#8DE8E8]/10 transition-all duration-300">
+        <div className="flex justify-between items-center px-4 md:px-10 py-4 max-w-full mx-auto relative">
           
-          {/* Left Side: 3-dot Menu + Logo */}
-          <div className="flex items-center gap-3">
+          {/* Left Side: System ID */}
+          <div className="flex items-center gap-6">
+            <div className="hidden lg:flex flex-col font-mono">
+               <span className="text-[8px] font-black text-[#8DE8E8] uppercase tracking-[0.2em] mb-1">System ID</span>
+               <span className="text-[10px] text-[#E0E1DD] font-bold">RL-DEPLOY-01</span>
+            </div>
             <button 
               className="md:hidden text-on-surface p-1 -ml-1 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -34,18 +38,31 @@ export default function Layout() {
             </button>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/services')}`} to="/services">Services</Link>
-            <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/projects')}`} to="/projects">Projects</Link>
-            <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/lab')}`} to="/lab">The Lab</Link>
-            <Link className={`tracking-tight text-sm font-medium transition-all duration-300 ${isActive('/about')}`} to="/about">About</Link>
+          {/* Center: Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-12">
+            {[
+              { label: 'SERVICES', path: '/services' },
+              { label: 'PROJECTS', path: '/projects' },
+              { label: 'ABOUT', path: '/about' }
+            ].map((link) => (
+              <Link 
+                key={link.path}
+                className={`tracking-[0.3em] text-[10px] font-black transition-all duration-300 ${isActive(link.path)} uppercase`} 
+                to={link.path}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
           
           {/* Right Side: Start a Project CTA */}
-          <div>
-            <Link to="/contact" className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-4 md:px-5 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold tracking-tight active:opacity-80 transition-all hover:scale-105">
-              Start a Project
+          <div className="flex items-center gap-8">
+            <div className="hidden lg:flex flex-col font-mono text-right">
+               <span className="text-[8px] font-black text-[#8DE8E8] uppercase tracking-[0.2em] mb-1">Registry</span>
+               <span className="text-[10px] text-[#E0E1DD] font-bold">CORE-STABLE</span>
+            </div>
+            <Link to="/contact" className="bg-[#8DE8E8] text-[#0D1B2A] px-6 py-2 rounded-sm text-[10px] font-black tracking-[0.2em] uppercase active:opacity-80 transition-all hover:scale-105 shadow-[0_0_20px_rgba(141,232,232,0.2)]">
+              INITIALIZE
             </Link>
           </div>
         </div>
@@ -57,13 +74,24 @@ export default function Layout() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden bg-surface border-b border-outline-variant/10 absolute top-full left-0 w-full shadow-xl"
+              className="md:hidden overflow-hidden bg-[#0D1B2A]/95 backdrop-blur-2xl border-b border-[#8DE8E8]/10 absolute top-full left-0 w-full shadow-2xl"
             >
-              <div className="flex flex-col px-6 py-6 gap-6">
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/services')}`} onClick={closeMenu} to="/services">Services</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/projects')}`} onClick={closeMenu} to="/projects">Projects</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/lab')}`} onClick={closeMenu} to="/lab">The Lab</Link>
-                <Link className={`tracking-tight text-lg font-medium ${isActive('/about')}`} onClick={closeMenu} to="/about">About</Link>
+              <div className="flex flex-col px-8 py-10 gap-8">
+                {[
+                  { label: 'SERVICES', path: '/services' },
+                  { label: 'PROJECTS', path: '/projects' },
+                  { label: 'ABOUT', path: '/about' },
+                  { label: 'CONTACT', path: '/contact' }
+                ].map((link) => (
+                  <Link 
+                    key={link.path}
+                    className={`tracking-[0.4em] text-sm font-black transition-all duration-300 ${isActive(link.path)} uppercase`} 
+                    onClick={closeMenu} 
+                    to={link.path}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </motion.div>
           )}
@@ -102,12 +130,12 @@ export default function Layout() {
       <footer className="bg-surface-container-lowest w-full py-12 px-8 border-t border-outline-variant/10 relative z-10 mt-auto">
         <div className="flex flex-col md:flex-row justify-end items-center gap-6 max-w-7xl mx-auto">
           <div className="flex flex-wrap justify-center gap-8">
-            <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/mobile-apps">Custom Mobile Apps</Link>
-            <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/websites">High-Performance Websites</Link>
-            <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/contact">Contact</Link>
+            <Link className="uppercase tracking-[0.05em] text-[10px] text-[#A0B2C1] hover:text-[#8DE8E8] transition-colors font-medium" to="/services">Mobile Apps</Link>
+            <Link className="uppercase tracking-[0.05em] text-[10px] text-[#A0B2C1] hover:text-[#8DE8E8] transition-colors font-medium" to="/services">Websites</Link>
+            <Link className="uppercase tracking-[0.05em] text-[10px] text-[#A0B2C1] hover:text-[#8DE8E8] transition-colors font-medium" to="/contact">Contact</Link>
           </div>
-          <div className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant font-medium">
-            © 2026 Regulus Labs. The Celestial Engine.
+          <div className="uppercase tracking-[0.05em] text-[10px] text-[#A0B2C1] font-medium">
+            © 2026 Regulus Labs.
           </div>
         </div>
       </footer>
