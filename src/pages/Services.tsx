@@ -48,35 +48,47 @@ export default function Services() {
 
       <motion.div 
         className="relative z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
       >
         <div className="mb-24">
           <motion.div 
             className="inline-block px-3 py-1 rounded-sm bg-primary/10 border border-primary/20 mb-6"
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
           >
             <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Our Services</span>
           </motion.div>
           <motion.h1 
             className="text-4xl md:text-6xl font-black mb-8 tracking-tighter text-[#E0E1DD] leading-tight"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
           >
             Building high-performance <br /> <span className="text-primary italic">Software.</span>
           </motion.h1>
-          <p className="text-[#A0B2C1] text-lg max-w-3xl font-light leading-relaxed">
+          <motion.p 
+            className="text-[#A0B2C1] text-lg max-w-3xl font-light leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             We focus on creating reliable mobile apps and fast websites for your business.
-          </p>
+          </motion.p>
         </div>
 
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-1 bg-[#8DE8E8]/5 border border-[#8DE8E8]/5 rounded-sm overflow-hidden"
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
         >
           {serviceList.map((service, index) => (
             <motion.div 

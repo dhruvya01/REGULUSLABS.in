@@ -10,11 +10,16 @@ function AnimatedBackground() {
   const innerRef = useRef<THREE.Group>(null);
   const orbitalRef = useRef<THREE.Group>(null);
 
+  const mainGroupRef = useRef<THREE.Group>(null);
+  const targetRotation = useRef({ x: 0, y: 0 });
+  const lightRef = useRef<THREE.PointLight>(null);
+
   // Create a dense, varied particle field
   const particlesCount = 4000;
-  const [positions, sizes] = useMemo(() => {
+  const [positions, sizes, originalSizes] = useMemo(() => {
     const pos = new Float32Array(particlesCount * 3);
     const s = new Float32Array(particlesCount);
+    const os = new Float32Array(particlesCount);
     for (let i = 0; i < particlesCount; i++) {
       const radius = 6 + Math.random() * 18;
       const angle = Math.random() * Math.PI * 2;
@@ -25,16 +30,49 @@ function AnimatedBackground() {
       pos[i * 3 + 2] = Math.sin(angle) * radius;
 
       s[i] = Math.random() * 1.5;
+      os[i] = s[i];
     }
-    return [pos, s];
+    return [pos, s, os];
   }, []);
 
   useFrame((state) => {
-    const { clock } = state;
+    const { clock, mouse } = state;
     const time = clock.getElapsedTime();
+
+    // Mouse tilt interactivity
+    targetRotation.current.x = mouse.y * 0.15;
+    targetRotation.current.y = mouse.x * 0.15;
+
+    if (mainGroupRef.current) {
+      // Smoothly interpolate towards target rotation
+      mainGroupRef.current.rotation.x = THREE.MathUtils.lerp(mainGroupRef.current.rotation.x, targetRotation.current.x, 0.05);
+      mainGroupRef.current.rotation.y = THREE.MathUtils.lerp(mainGroupRef.current.rotation.y, targetRotation.current.y, 0.05);
+      
+      // Add subtle scroll-based drift if window exists
+      if (typeof window !== 'undefined') {
+        mainGroupRef.current.position.y = window.scrollY * -0.002;
+        mainGroupRef.current.rotation.z = window.scrollY * 0.0005;
+      }
+    }
+
+    if (lightRef.current) {
+      // Breathing light intensity
+      lightRef.current.intensity = 12 + Math.sin(time * 2) * 4;
+      // Subtly move light with mouse
+      lightRef.current.position.x = mouse.x * 2;
+      lightRef.current.position.y = mouse.y * 2;
+    }
 
     if (pointsRef.current) {
       pointsRef.current.rotation.y = time * 0.02;
+      
+      // Twinkle effect
+      const sizesAttr = pointsRef.current.geometry.attributes.size as THREE.BufferAttribute;
+      for (let i = 0; i < particlesCount; i++) {
+        const twinkle = Math.sin(time * 2 + i) * 0.5 + 0.5;
+        sizesAttr.array[i] = originalSizes[i] * (0.8 + twinkle * 0.4);
+      }
+      sizesAttr.needsUpdate = true;
     }
 
     if (coreRef.current) {
@@ -60,7 +98,7 @@ function AnimatedBackground() {
   });
 
   return (
-    <group>
+    <group ref={mainGroupRef}>
       {/* Central Planet */}
       <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
         <group ref={coreRef}>
@@ -154,7 +192,7 @@ function AnimatedBackground() {
       </points>
 
       {/* Global Glow */}
-      <pointLight intensity={12} color="#8DE8E8" distance={15} />
+      <pointLight ref={lightRef} intensity={12} color="#8DE8E8" distance={15} />
       <pointLight position={[-12, -8, -10]} intensity={3} color="#B2F7F7" />
     </group>
   );

@@ -188,9 +188,10 @@ export default function Home() {
              <motion.div 
                key={i}
                className="bg-[#0D1B2A]/80 backdrop-blur-sm p-12 hover:bg-[#1B263B]/90 transition-all group border-t border-transparent hover:border-[#8DE8E8]/20"
-               whileInView={{ opacity: 1 }}
-               initial={{ opacity: 0 }}
-               viewport={{ once: true }}
+               initial={{ opacity: 0, y: 30 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: i * 0.2, ease: "easeOut" }}
+               viewport={{ once: true, amount: 0.2 }}
              >
                <span className="text-[8px] font-bold text-primary/40 uppercase tracking-widest mb-4 block">{tech.id}</span>
                <h3 className="text-xl font-black text-[#8DE8E8] mb-4 tracking-tighter group-hover:tracking-widest transition-all">{tech.title}</h3>

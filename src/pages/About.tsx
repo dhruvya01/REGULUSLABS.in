@@ -44,8 +44,8 @@ export default function About() {
             Regulus Labs. <br />
             <span className="text-primary italic">Building digital products.</span>
           </h1>
-          <p className="text-[#A0B2C1] text-xl max-w-3xl leading-relaxed font-light">
-            We are a team of engineers dedicated to creating reliable software solutions.
+          <p className="text-[#A0B2C1] text-xl max-w-4xl leading-relaxed font-light">
+            Regulus Labs is founded in 2024 is the mother concern for everything we do. It’s where our journey started and where our expertise across diverse fields converges to deliver integrated, high-impact solutions.
           </p>
         </motion.div>
 

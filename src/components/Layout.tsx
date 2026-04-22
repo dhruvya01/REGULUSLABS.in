@@ -24,23 +24,27 @@ export default function Layout() {
       <nav className="fixed top-0 w-full z-50 bg-[#0D1B2A]/80 backdrop-blur-md border-b border-[#8DE8E8]/10 transition-all duration-300">
         <div className="flex justify-between items-center px-4 md:px-10 py-4 max-w-full mx-auto relative">
           
-          {/* Left Side: System ID */}
-          <div className="flex items-center gap-6">
+          {/* Left Side: System ID (Clickable Logo) */}
+          <Link to="/" className="flex items-center gap-6 group">
             <div className="hidden lg:flex flex-col font-mono">
-               <span className="text-[8px] font-black text-[#8DE8E8] uppercase tracking-[0.2em] mb-1">System ID</span>
-               <span className="text-[10px] text-[#E0E1DD] font-bold">RL-DEPLOY-01</span>
+               <span className="text-[8px] font-black text-[#8DE8E8] uppercase tracking-[0.2em] mb-1 group-hover:text-primary transition-colors">System ID</span>
+               <span className="text-[10px] text-[#E0E1DD] font-bold group-hover:text-primary transition-colors">RL-DEPLOY-01</span>
             </div>
             <button 
               className="md:hidden text-on-surface p-1 -ml-1 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMenuOpen(!isMenuOpen);
+              }}
             >
               {isMenuOpen ? <X size={24} /> : <MoreVertical size={24} />}
             </button>
-          </div>
+          </Link>
 
           {/* Center: Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-12">
             {[
+              { label: 'HOME', path: '/' },
               { label: 'SERVICES', path: '/services' },
               { label: 'PROJECTS', path: '/projects' },
               { label: 'ABOUT', path: '/about' }
@@ -78,6 +82,7 @@ export default function Layout() {
             >
               <div className="flex flex-col px-8 py-10 gap-8">
                 {[
+                  { label: 'HOME', path: '/' },
                   { label: 'SERVICES', path: '/services' },
                   { label: 'PROJECTS', path: '/projects' },
                   { label: 'ABOUT', path: '/about' },
