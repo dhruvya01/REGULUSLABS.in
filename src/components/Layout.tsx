@@ -30,7 +30,9 @@ export default function Layout() {
             >
               {isMenuOpen ? <X size={24} /> : <MoreVertical size={24} />}
             </button>
-            <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-xl font-black tracking-tighter text-[#50c878]">Regulus Labs</Link>
+            <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center">
+              <img src="/logo.png" alt="Regulus Labs" className="h-8 w-auto md:h-10 transition-transform hover:scale-105" />
+            </Link>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -100,7 +102,9 @@ export default function Layout() {
       {/* Footer */}
       <footer className="bg-surface-container-lowest w-full py-12 px-8 border-t border-outline-variant/10 relative z-10 mt-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
-          <Link to="/" className="text-lg font-bold text-[#50c878] tracking-tighter">Regulus Labs</Link>
+          <Link to="/" className="flex items-center">
+            <img src="/logo.png" alt="Regulus Labs" className="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          </Link>
           <div className="flex flex-wrap justify-center gap-8">
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/mobile-apps">Custom Mobile Apps</Link>
             <Link className="uppercase tracking-[0.05em] text-[10px] text-on-surface-variant hover:text-secondary-fixed transition-colors font-medium" to="/services/websites">High-Performance Websites</Link>
