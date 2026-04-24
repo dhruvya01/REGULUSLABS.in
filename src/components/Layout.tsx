@@ -28,8 +28,8 @@ export default function Layout() {
           
           {/* Left Side: Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:border-primary/50 transition-all overflow-hidden p-1.5">
-              <img src="/logo.png" alt="Regulus Labs Logo" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+            <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:border-primary/50 transition-all">
+              <Globe className="w-6 h-6 text-primary group-hover:rotate-[30deg] transition-transform duration-500" />
             </div>
             <div className="flex flex-col font-mono">
                <span className="text-[12px] font-black text-on-surface uppercase tracking-[0.2em] group-hover:text-primary transition-colors">REGULUS LABS</span>
