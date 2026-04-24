@@ -9,7 +9,7 @@ const projects = [
     title: "MustGym",
     type: "Enterprise Suite",
     desc: "A management system for fitness centers.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop&fm=webp",
     link: "/mustgym",
     tag: "ALPHA-01"
   }
@@ -50,19 +50,19 @@ export default function Projects() {
       >
         <div className="mb-20">
           <motion.div 
-            className="inline-block px-3 py-1 rounded-sm bg-[#8DE8E8]/10 border border-[#8DE8E8]/20 mb-6"
+            className="inline-block px-3 py-1 rounded-sm bg-primary/10 border border-primary/20 mb-6"
             variants={itemVariants}
           >
-            <span className="text-[10px] font-black text-[#8DE8E8] uppercase tracking-[0.3em]">Work Repository</span>
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Work Repository</span>
           </motion.div>
           <motion.h1 
-            className="text-4xl md:text-7xl font-black mb-8 tracking-tighter text-[#E0E1DD] leading-tight"
+            className="text-4xl md:text-7xl font-black mb-8 tracking-tighter text-on-surface leading-tight"
             variants={itemVariants}
           >
             Our <span className="text-primary italic">Work.</span>
           </motion.h1>
           <motion.p 
-            className="text-[#A0B2C1] text-lg max-w-3xl font-light leading-relaxed"
+            className="text-on-surface-variant text-lg max-w-3xl font-light leading-relaxed"
             variants={itemVariants}
           >
             A collection of our software products and systems.
@@ -81,14 +81,16 @@ export default function Projects() {
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-40 blur-[1px] group-hover:blur-0"
                   />
-                  <div className="absolute inset-0 bg-[#0D1B2A]/40 group-hover:bg-transparent transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-surface/40 group-hover:bg-transparent transition-colors duration-500" />
                   
                   <div className="absolute inset-0 pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity">
-                     <Suspense fallback={null}>
-                        <Object3D />
-                     </Suspense>
+                      <Suspense fallback={null}>
+                         <Object3D />
+                      </Suspense>
                   </div>
                 </div>
               </div>
@@ -99,25 +101,25 @@ export default function Projects() {
                     <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">{project.tag}</span>
                     <div className="h-[1px] w-12 bg-primary/20" />
                   </div>
-                  <h2 className="text-4xl md:text-5xl font-black text-[#E0E1DD] tracking-tight">{project.title}</h2>
-                  <p className="text-[#A0B2C1] text-lg font-light leading-relaxed">{project.desc}</p>
+                  <h2 className="text-4xl md:text-5xl font-black text-on-surface tracking-tight">{project.title}</h2>
+                  <p className="text-on-surface-variant text-lg font-light leading-relaxed">{project.desc}</p>
                 </div>
 
-                <div className="flex gap-12 border-y border-[#8DE8E8]/5 py-8">
+                <div className="flex gap-12 border-y border-primary/10 py-8">
                    <div className="space-y-1">
-                      <p className="text-[9px] font-bold text-[#8DE8E8]/40 uppercase tracking-widest">Protocol</p>
-                      <p className="text-xs font-black text-[#E0E1DD]">NATIVE V1.0</p>
+                      <p className="text-[9px] font-bold text-secondary uppercase tracking-widest">Protocol</p>
+                      <p className="text-xs font-black text-on-surface">NATIVE V1.0</p>
                    </div>
                    <div className="space-y-1">
-                      <p className="text-[9px] font-bold text-[#8DE8E8]/40 uppercase tracking-widest">Status</p>
-                      <p className="text-xs font-black text-[#E0E1DD]">OPERATIONAL</p>
+                      <p className="text-[9px] font-bold text-tertiary uppercase tracking-widest">Status</p>
+                      <p className="text-xs font-black text-on-surface">OPERATIONAL</p>
                    </div>
                 </div>
 
                 <div className="flex pt-4">
                   <Link 
                     to={project.link} 
-                    className="flex items-center gap-4 text-sm font-black text-[#8DE8E8] group hover:gap-8 transition-all uppercase tracking-widest"
+                    className="flex items-center gap-4 text-sm font-black text-primary group hover:gap-8 transition-all uppercase tracking-widest neon-glow-primary px-6 py-3 border border-primary/20 bg-primary/5 rounded-sm"
                   >
                     Enter Lab <MoveRight className="group-hover:translate-x-2 transition-transform" />
                   </Link>

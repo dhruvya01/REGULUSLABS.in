@@ -64,7 +64,7 @@ export default function Services() {
             <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Our Services</span>
           </motion.div>
           <motion.h1 
-            className="text-4xl md:text-6xl font-black mb-8 tracking-tighter text-[#E0E1DD] leading-tight"
+            className="text-4xl md:text-6xl font-black mb-8 tracking-tighter text-on-surface leading-tight"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -73,7 +73,7 @@ export default function Services() {
             Building high-performance <br /> <span className="text-primary italic">Software.</span>
           </motion.h1>
           <motion.p 
-            className="text-[#A0B2C1] text-lg max-w-3xl font-light leading-relaxed"
+            className="text-on-surface-variant text-lg max-w-3xl font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -84,7 +84,7 @@ export default function Services() {
         </div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-1 bg-[#8DE8E8]/5 border border-[#8DE8E8]/5 rounded-sm overflow-hidden"
+          className="grid grid-cols-1 md:grid-cols-2 gap-1 bg-primary/5 border border-primary/5 rounded-sm overflow-hidden"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -94,23 +94,23 @@ export default function Services() {
             <motion.div 
               key={index}
               variants={itemVariants}
-              className="group p-8 md:p-12 bg-[#0D1B2A] hover:bg-[#1B263B] transition-all duration-500 flex flex-col justify-between min-h-[350px]"
+              className="group p-8 md:p-12 bg-surface hover:bg-surface-container transition-all duration-500 flex flex-col justify-between min-h-[350px]"
             >
               <div>
-                <div className="w-12 h-12 rounded-sm bg-[#8DE8E8]/5 flex items-center justify-center mb-8 border border-[#8DE8E8]/10 group-hover:bg-primary/10 transition-all">
-                  <service.icon className="text-[#8DE8E8]" size={24} />
+                <div className="w-12 h-12 rounded-sm bg-primary/5 flex items-center justify-center mb-8 border border-primary/10 group-hover:bg-primary/20 transition-all neon-glow-primary">
+                  <service.icon className="text-primary" size={24} />
                 </div>
-                <h2 className="text-2xl font-black text-[#E0E1DD] mb-6 tracking-tight group-hover:text-primary transition-colors">
+                <h2 className="text-2xl font-black text-on-surface mb-6 tracking-tight group-hover:text-secondary transition-colors">
                   {service.title}
                 </h2>
-                <p className="text-[#A0B2C1] text-sm leading-relaxed mb-8 font-light italic opacity-80 group-hover:opacity-100 transition-opacity">
+                <p className="text-on-surface-variant text-sm leading-relaxed mb-8 font-light italic opacity-80 group-hover:opacity-100 transition-opacity">
                   {service.desc}
                 </p>
               </div>
               
               <div className="flex flex-wrap gap-2">
                 {service.tech.map((t, i) => (
-                  <span key={i} className="text-[9px] font-bold text-[#8DE8E8]/40 px-2 py-1 border border-[#8DE8E8]/10 rounded-sm">
+                  <span key={i} className="text-[9px] font-bold text-secondary/40 px-2 py-1 border border-secondary/10 rounded-sm">
                     {t}
                   </span>
                 ))}

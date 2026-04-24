@@ -105,29 +105,29 @@ function AnimatedBackground() {
           {/* Main Sphere */}
           <Sphere args={[1.5, 64, 64]}>
             <MeshDistortMaterial
-              color="#0D1B2A"
-              distort={0.15}
-              speed={1.5}
-              roughness={0.4}
-              metalness={0.8}
-              emissive="#1B263B"
-              emissiveIntensity={0.2}
+              color="#010204"
+              distort={0.12}
+              speed={1.2}
+              roughness={0.1}
+              metalness={0.95}
+              emissive="#001F3F"
+              emissiveIntensity={0.6}
             />
           </Sphere>
           
           {/* Planet Atmosphere/Glow */}
           <Sphere args={[1.55, 32, 32]}>
-            <meshBasicMaterial color="#8DE8E8" transparent opacity={0.05} wireframe />
+            <meshBasicMaterial color="#00D1FF" transparent opacity={0.08} wireframe />
           </Sphere>
 
           {/* Planetary Ring */}
           <mesh rotation={[Math.PI / 2.5, 0, 0]}>
             <ringGeometry args={[2.2, 2.5, 64]} />
-            <meshBasicMaterial color="#8DE8E8" transparent opacity={0.1} side={THREE.DoubleSide} />
+            <meshBasicMaterial color="#0077FF" transparent opacity={0.2} side={THREE.DoubleSide} />
           </mesh>
           <mesh rotation={[Math.PI / 2.5, 0, 0]}>
             <ringGeometry args={[2.6, 2.65, 64]} />
-            <meshBasicMaterial color="#8DE8E8" transparent opacity={0.05} side={THREE.DoubleSide} />
+            <meshBasicMaterial color="#00D1FF" transparent opacity={0.12} side={THREE.DoubleSide} />
           </mesh>
         </group>
       </Float>
@@ -138,7 +138,7 @@ function AnimatedBackground() {
           <group key={i} rotation={[0, (i * Math.PI) / 2, 0]}>
             <mesh position={[4 + i * 0.5, Math.sin(i) * 1.5, 0]}>
               <Sphere args={[0.08, 16, 16]}>
-                <meshStandardMaterial color="#8DE8E8" emissive="#8DE8E8" emissiveIntensity={2} />
+                <meshStandardMaterial color="#00D1FF" emissive="#00D1FF" emissiveIntensity={4} />
               </Sphere>
             </mesh>
           </group>
@@ -149,11 +149,11 @@ function AnimatedBackground() {
       <group ref={outerRef}>
         <lineSegments>
           <torusGeometry args={[4.2, 0.015, 12, 128]} />
-          <lineBasicMaterial color="#8DE8E8" transparent opacity={0.15} />
+          <lineBasicMaterial color="#0077FF" transparent opacity={0.25} />
         </lineSegments>
         <lineSegments rotation={[Math.PI / 2.5, 0, 0]}>
           <torusGeometry args={[5, 0.01, 12, 128]} />
-          <lineBasicMaterial color="#B2F7F7" transparent opacity={0.08} />
+          <lineBasicMaterial color="#00D1FF" transparent opacity={0.2} />
         </lineSegments>
       </group>
 
@@ -161,7 +161,7 @@ function AnimatedBackground() {
       <group ref={innerRef}>
         <mesh scale={2.8}>
           <icosahedronGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#8DE8E8" wireframe transparent opacity={0.03} />
+          <meshBasicMaterial color="#0077FF" wireframe transparent opacity={0.06} />
         </mesh>
       </group>
 
@@ -182,30 +182,30 @@ function AnimatedBackground() {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.04}
-          color="#8DE8E8"
+          size={0.05}
+          color="#00D1FF"
           transparent
-          opacity={0.5}
+          opacity={0.7}
           sizeAttenuation
           blending={THREE.AdditiveBlending}
         />
       </points>
 
       {/* Global Glow */}
-      <pointLight ref={lightRef} intensity={12} color="#8DE8E8" distance={15} />
-      <pointLight position={[-12, -8, -10]} intensity={3} color="#B2F7F7" />
+      <pointLight ref={lightRef} intensity={15} color="#0077FF" distance={15} />
+      <pointLight position={[-12, -8, -10]} intensity={4} color="#00D1FF" />
     </group>
   );
 }
 
 export default function Hero3D() {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
+    <div className="absolute inset-0 z-0 pointer-events-none opacity-90">
       <Canvas>
         <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} color="#8DE8E8" intensity={1.5} />
-        <spotLight position={[-10, -10, -10]} color="#B2F7F7" intensity={1} />
+        <ambientLight intensity={0.3} />
+        <pointLight position={[10, 10, 10]} color="#00D1FF" intensity={2} />
+        <spotLight position={[-10, -10, -10]} color="#0077FF" intensity={1.5} />
         <AnimatedBackground />
       </Canvas>
     </div>

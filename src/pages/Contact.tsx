@@ -10,6 +10,7 @@ export default function Contact() {
   const [service, setService] = useState<ServiceType | null>(null);
   const [description, setDescription] = useState('');
   const [budget, setBudget] = useState('');
+  const [isCustomBudget, setIsCustomBudget] = useState(false);
   const [timeline, setTimeline] = useState('');
 
   const whatsappNumber = "917889686144";
@@ -81,10 +82,15 @@ Target Timeline: ${timeline}`;
             ].map((item) => (
               <motion.button
                 key={item.id}
-                whileHover={{ y: -5, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.02,
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+                  borderColor: "rgba(0, 209, 255, 0.4)"
+                }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleServiceSelect(item.id)}
-                className="glass-panel p-6 md:p-8 rounded-xl flex flex-col items-center gap-4 text-center hover:border-primary/40 transition-colors group"
+                className="glass-panel p-6 md:p-8 rounded-xl flex flex-col items-center gap-4 text-center hover:border-primary/40 transition-all duration-300 group"
               >
                 <div className={`w-14 h-14 rounded-full flex items-center justify-center bg-${item.color}/10 border border-${item.color}/20 group-hover:bg-${item.color}/20 transition-colors`}>
                   <div className={`text-${item.color}`}>{item.icon}</div>
@@ -124,13 +130,15 @@ Target Timeline: ${timeline}`;
               className="w-full bg-surface-container-low border border-outline/20 rounded-xl p-6 min-h-[200px] text-on-surface focus:outline-none focus:border-primary/50 transition-colors mb-8 resize-none"
             />
 
-            <button
+            <motion.button
               disabled={!description.trim()}
+              whileHover={description.trim() ? { scale: 1.02, boxShadow: "0 0 30px rgba(0, 209, 255, 0.4)" } : {}}
+              whileTap={description.trim() ? { scale: 0.98 } : {}}
               onClick={() => setStep('details')}
-              className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(141,232,232,0.2)] transition-all"
+              className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               Set Scope <Send className="w-5 h-5 ml-2" />
-            </button>
+            </motion.button>
           </motion.div>
         )}
 
@@ -154,12 +162,15 @@ Target Timeline: ${timeline}`;
                   <h3 className="text-lg font-bold">Estimated Budget</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-3">
-                  {['Under ₹50k', '₹50k - ₹1L', '₹1L - ₹5L', '₹5L+'].map((range) => (
+                  {['₹20k', '₹30k', '₹50k'].map((range) => (
                     <button
                       key={range}
-                      onClick={() => setBudget(range)}
+                      onClick={() => {
+                        setBudget(range);
+                        setIsCustomBudget(false);
+                      }}
                       className={`px-6 py-4 rounded-xl border text-left font-medium transition-all ${
-                        budget === range 
+                        budget === range && !isCustomBudget
                         ? 'bg-primary/10 border-primary text-primary' 
                         : 'bg-surface-container-low border-outline/20 text-on-surface-variant hover:border-primary/40'
                       }`}
@@ -167,6 +178,43 @@ Target Timeline: ${timeline}`;
                       {range}
                     </button>
                   ))}
+                  
+                  <button
+                    onClick={() => {
+                      setIsCustomBudget(true);
+                      setBudget('');
+                    }}
+                    className={`px-6 py-4 rounded-xl border text-left font-medium transition-all ${
+                      isCustomBudget
+                      ? 'bg-primary/10 border-primary text-primary' 
+                      : 'bg-surface-container-low border-outline/20 text-on-surface-variant hover:border-primary/40'
+                    }`}
+                  >
+                    Custom Amount
+                  </button>
+
+                  <AnimatePresence>
+                    {isCustomBudget && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="relative pt-2">
+                          <IndianRupee className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+                          <input
+                            autoFocus
+                            type="text"
+                            placeholder="Enter amount (e.g. 25,000)"
+                            value={budget}
+                            onChange={(e) => setBudget(e.target.value)}
+                            className="w-full bg-surface-container-low border border-primary/50 rounded-xl py-4 pl-12 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
 
@@ -193,13 +241,15 @@ Target Timeline: ${timeline}`;
               </div>
             </div>
 
-            <button
+            <motion.button
               disabled={!budget || !timeline}
+              whileHover={budget && timeline ? { scale: 1.02, boxShadow: "0 0 30px rgba(0, 209, 255, 0.4)" } : {}}
+              whileTap={budget && timeline ? { scale: 0.98 } : {}}
               onClick={() => setStep('method')}
-              className="w-full mt-12 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(141,232,232,0.2)] transition-all"
+              className="w-full mt-12 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               Continue to Dispatch <Send className="w-5 h-5 ml-2" />
-            </button>
+            </motion.button>
           </motion.div>
         )}
 
@@ -221,9 +271,15 @@ Target Timeline: ${timeline}`;
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               <motion.button
-                whileHover={{ y: -5 }}
+                whileHover={{ 
+                  y: -10,
+                  backgroundColor: "rgba(37, 211, 102, 0.2)",
+                  borderColor: "rgba(37, 211, 102, 0.5)",
+                  boxShadow: "0 10px 30px rgba(37, 211, 102, 0.2)"
+                }}
+                whileTap={{ scale: 0.95 }}
                 onClick={openWhatsApp}
-                className="flex items-center justify-center gap-4 p-8 rounded-2xl bg-[#25D366]/10 border border-[#25D366]/30 text-on-surface hover:bg-[#25D366]/20 transition-all font-bold"
+                className="flex items-center justify-center gap-4 p-8 rounded-2xl bg-[#25D366]/10 border border-[#25D366]/30 text-on-surface transition-all font-bold"
               >
                 <MessageCircle className="w-8 h-8 text-[#25D366]" />
                 <div className="text-left">
@@ -232,9 +288,15 @@ Target Timeline: ${timeline}`;
               </motion.button>
 
               <motion.button
-                whileHover={{ y: -5 }}
+                whileHover={{ 
+                  y: -10,
+                  backgroundColor: "rgba(0, 209, 255, 0.2)",
+                  borderColor: "rgba(0, 209, 255, 0.5)",
+                  boxShadow: "0 10px 30px rgba(0, 209, 255, 0.2)"
+                }}
+                whileTap={{ scale: 0.95 }}
                 onClick={openGmail}
-                className="flex items-center justify-center gap-4 p-8 rounded-2xl bg-secondary-fixed/10 border border-secondary-fixed/30 text-on-surface hover:bg-secondary-fixed/20 transition-all font-bold"
+                className="flex items-center justify-center gap-4 p-8 rounded-2xl bg-secondary-fixed/10 border border-secondary-fixed/30 text-on-surface transition-all font-bold"
               >
                 <Mail className="w-8 h-8 text-secondary-fixed" />
                 <div className="text-left">
