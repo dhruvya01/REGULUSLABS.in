@@ -49,6 +49,7 @@ export default function Home() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative mb-16"
         >
+
           <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter text-on-surface leading-[0.8] drop-shadow-[0_0_50px_rgba(0,209,255,0.2)]">
             REGULUS <br /> <span className="text-primary italic">LABS.</span>
           </h1>
